@@ -1,0 +1,96 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+
+\usepackage[utf8x]{inputenc}
+\usepackage[lithuanian]{babel}
+\usepackage[L7x]{fontenc}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{verbatim} % Naudosim komentams, kurie ilgesni nei viena eilutė.
+\input{page_settings} % Šitame faile guli mano puslapio nustatymai
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+\usepackage{tocloft}
+\usepackage{url}      % Kad url būtų tvarkingi
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+\begin{document}
+
+
+\include{title_page}
+\let \savenumberline \numberline
+\def \numberline#1{\savenumberline{#1.}}
+\tableofcontents
+\newpage
+
+\begin{comment}
+Įvade apibūdinamas darbo tikslas, temos aktualumas ir siekiami rezultatai. Darbo įvadas neturi būti dėstymo santrauka. Įvado apimtis 1–2 puslapiai.
+\end{comment}
+
+\addcontentsline{toc}{section}{ĮVADAS}
+\section*{ĮVADAS}
+
+Šiandien reta veikla (mokslas, verslas, pramogos ir t.t.) gali išsiversti ir pilnai funkcionuoti be vienokių ar kitokių informacinių sistemų pagalbos. Viena iš informacinių sistemų rūšių yra tiesioginio transakcijų apdorojimo sistemos. Tokių sistemų svarba, o kartu ir paklausa, nuolat auga, todėl jų kuriama vis daugiau ir vis sudėtingesnių. Šio darbo tikslas yra apžvelgti tiesioginio transakcijų apdorojimo sistemas, jų skirtumus su panašaus pabūdžio informacinėmis sistemomis bei pažvelgti į tokių sistemų kūrimo tendencijas.
+
+Informacinių sistemų rinka yra labai aktyvi. Joje yra nemažai didelių žaidėjų, kurie investuoja milžiniškas pinigų sumas tam, kad būtų sukurtos naudotojų poreikius vis geriau tenkinančios sistemos. Šios sistemos yra iš dalies tarpusavyje panašios, tačiau kai kurie jų funkcionalumo aspektai gali gana esmingai skirtis. Todėl yra aktualu žinoti pagrindinius tokių sistemų skirtumus tam, kad būtų naudojama geriausiai poreikius tenkinanti informacinė sistema.
+
+Šiuolaikinis verslas turi būti dinamiškas ir reaguoti į rinkos pokyčius tam, kad būtų galima konkuruoti bei kurti vis geresnę produkciją. Tokiam verslui jau dabar svarbu žinoti kaip atrodys ateities informacinės sistemos. Taip yra, nes informacinės technologijos sensta, jas keičia naujos, kurių atsiranda vis daugiau ir vis įvairesnių. Žinoti svarbiausias su informacinėmis sistemomis susijusias naujienas yra aktualu, nes šiandien priimti sprendimai įtakos verslo veiklą rytoj. Dėl to informacinių sistemų technologijų ir jų naudojimo formų tendencijų apžvalga yra nuolat aktuali tema.
+
+Vienas aktualiausių tiesioginio transakcijų apdorojimo sistemų ypatumų - realaus laiko darbas interneto naršyklėse. Tokių sistemų svarba yra didelė, nes tobulėjant internetinėms technologijoms, naršyklėse veikiančių programų galimybės ir funkcionalumas sparčiai artėja prie į galutinio kliento kompiuterį įrašytų programų. Kad ir kokios geros šiandieninės internetinės programos bebūtų, internetinių technologijų kūrėjai nesėdi sudėję rankų. Jie dirba tam, kad internetinės programos būtų dar funkcionalesnės, patogesnės ir stengiasi padaryti jų kūrimą lengvesniu. Informacinių technologijų industrija nestovi vietoje - ji siūlo vis geresnius sprendimus. Todėl mūsų pareiga yra išanalizuoti informacinių sistemų vystymosi tendencijas.
+
+Šiuo darbu siekiama susipažinti su tiesioginio transakcijų apdorojimo sistemomis. Darbo metu atliktos tiesioginio transakcijų apdorojimo sistemų analizės rezultatus bus galima panaudoti kuriant naujas informacines sistemas - sprendžiant kokios funkcijos turėtų būti sistemoje bei kokias technologinius įrankius reikėtų rinktis.
+
+\section{Tiesioginio transakcijų apdorojimo sistemos}
+
+\begin{comment}
+Online transactional processing (OLTP) is designed to efficiently process high volumes of transactions, instantly recording business events (such as a sales invoice payment) and reflecting changes as they occur.
+\end{comment}
+
+Tiesioginio transakcijų apdorojimo (toliau OLTP\footnote{OLTP - dažnai naudojamas sutrumpinimas angliškam terminui ,,Online Transction Processing``, kuris reiškia ,,tiesioginis transakcijų apdorojimas``}) (angl. Online Transactional Processing) sistemos - sistemos, kurios palaiko operacinio lygio veiksmus t.y. registruoja kasdienines rutinines verslo operacijas, būtinas verslo sistemai funkcionuoti, o jų esminis bruožas yra realaus laiko\footnote{Realaus laiko arba tikralaikis(-ė) (angl. real time) - vykstantis kompiuteryje ir sąveikaujantis su tuo pat metu vykstančiais procesais kompiuterio išorėje.\cite{DGJ08}} veika.
+
+\subsection{OLTP sistemų savybės}
+
+OLTP sistemos projektuojamos tam, kad sugebėtų efektyviai apdoroti didelius transakcijų kiekius - realiu laiku apdorotų verslo įvykius (pvz. užregistruotų pirkimus) ir nuolat dirbtų su naujausiais duomenimis. Tokia sistema nėra paprasta, todėl jai keliama daug reikalavimų. Trumpai apžvelgsiu pagrindinius OLTP sistemos reikalavimus.\\
+\begin{comment}
+The nature of OLTP environments is predominantly any kind of interactive ad hoc usage, such as telemarketeers entering telephone survey results. OLTP systems require short response times in order for users to remain productive.
+\end{comment}
+
+\begin{tabular}{|l|p{8cm}|}
+\hline 
+\textbf{Savybė} & \textbf{Paaiškinimas} \\ 
+\hline 
+Greitas atsako laikas & Visos OLTP sistemos yra kuriamos tam, kad jos būtų interaktyvios bei su jomis būtų galima dirbti pagal poreikį. OLTP sistemoms reikia trumpų atsako laikų, kad sistemos naudotojai išliktų produktyvūs. \\ 
+\hline
+\end{tabular}
+
+\subsection{Realaus laiko veika}
+Realaus laiko veika reiškia, kad su kompiuterine sistema sąveikaujantys agentai tikisi sinchronizuoto atsako į savo veiksmus. Kitaip tariant, operacijos kompiuteryje turi būti atliekamos pakankamai sparčiai, kad jų rezultatai būtų pateikti laiku, kol dar yra aktualūs. Pavyzdžiui tarkime, kad mūsų kompiuterinė sistema yra skirta pardavinėti bilietus: kasininkė negali laukti valandos ar dviejų, kol sistema atliks bilieto pirkimo operacijas apie ką tik atliktą pardavimą, nes kasininkei reikia aptarnauti kitus bilieto laukiančius klientus, tačiau sistema turi nuolat dirbti su nujausia duomenų būsena, gauname išvadą, kad sistema turi atlikti reikalingas operacijas per griežtai apibrėžtą laiką. Realaus laiko veiką užtikrinančios sistemos yra sudėtingos, dėl joms keliamų reikalavimų.
+
+\subsection{OLTP sistemų sandara}
+Pagrindinės tiesioginio transakcijų apdorojimo sistemos dalys yra:
+\begin{itemize}
+	\item Grafinė vartotojo sąsaja;
+	\item Reliacinė duomenų bazė;
+\end{itemize}
+
+\addcontentsline{toc}{section}{REZULTATAI IR IŠVADOS}
+\section*{REZULTATAI IR IŠVADOS}
+Čia bus rezultatų ir išvadų tekstas
+
+\addcontentsline{toc}{section}{ŠALTINIAI} 
+\section*{ŠALTINIAI}
+
+\begin{thebibliography}{99}
+% Reikia pagalbos kaip sutvarkyt literatūros išlygiavimą
+\bibitem[DGJ08]{DGJ08} 
+V. Dagienė, G. Grigas, T. Jevsikova. Enciklopedinis kompiuterijos žodynas. 2-as papildytas leidimas. Vilnius: TEV, 2008, 654 p. Žiūrėta[2011-05-29] Prieiga per internetą:\url{http://www.likit.lt/term/enc.html}
+
+\end{thebibliography}
+
+\addcontentsline{toc}{section}{SĄVOKŲ APIBRĖŽIMAI}
+\section*{SĄVOKŲ APIBRĖŽIMAI}
+
+\addcontentsline{toc}{section}{SANTRUMPOS}
+\section*{SANTRUMPOS}
+\end{document}
+
+pasižiūrėt, kaip reikia dirbt su setcounter komanda.
