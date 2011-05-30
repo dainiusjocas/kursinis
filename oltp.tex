@@ -10,6 +10,7 @@
 \newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
 \usepackage{tocloft}
 \usepackage{url}      % Kad url būtų tvarkingi
+\usepackage{parskip}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
@@ -49,16 +50,28 @@ Tiesioginio transakcijų apdorojimo (toliau OLTP\footnote{OLTP - dažnai naudoja
 
 \subsection{OLTP sistemų savybės}
 
-OLTP sistemos projektuojamos tam, kad sugebėtų efektyviai apdoroti didelius transakcijų kiekius - realiu laiku apdorotų verslo įvykius (pvz. užregistruotų pirkimus) ir nuolat dirbtų su naujausiais duomenimis. Tokia sistema nėra paprasta, todėl jai keliama daug reikalavimų. Trumpai apžvelgsiu pagrindinius OLTP sistemos reikalavimus.\\
+OLTP sistemos projektuojamos tam, kad sugebėtų efektyviai apdoroti didelius transakcijų kiekius - realiu laiku apdorotų verslo įvykius (pvz. užregistruotų pirkimus) ir nuolat dirbtų su naujausiais duomenimis. Trumpai apžvelgsiu pagrindines OLTP sistemos savybes.\\
 \begin{comment}
 The nature of OLTP environments is predominantly any kind of interactive ad hoc usage, such as telemarketeers entering telephone survey results. OLTP systems require short response times in order for users to remain productive.
 \end{comment}
 
-\begin{tabular}{|l|p{8cm}|}
+\begin{tabular}{|p{3.8cm}|p{9cm}|}
 \hline 
 \textbf{Savybė} & \textbf{Paaiškinimas} \\ 
 \hline 
-Greitas atsako laikas & Visos OLTP sistemos yra kuriamos tam, kad jos būtų interaktyvios bei su jomis būtų galima dirbti pagal poreikį. OLTP sistemoms reikia trumpų atsako laikų, kad sistemos naudotojai išliktų produktyvūs. \\ 
+Greitas atsako laikas 
+&
+ Visos OLTP sistemos yra kuriamos tam, kad jos būtų interaktyvios bei su jomis būtų galima dirbti pagal poreikį. OLTP sistemoms reikia trumpų atsako laikų, kad sistemos naudotojai išliktų produktyvūs. \\ 
+\hline
+Smulkios transakcijos 
+&
+ OLTP sistemos paprastai dirba tik su tam tikrais nedideliais duomenų kiekiais; duomenų apdorojimas dažniausiai yra paprastas, o sudėtingi DB\footnote{DB - santrumpa "Duomenų Bazė"} lentelių sujungimai yra naudojami palyginti retai. (angl. join)
+\\ 
+\hline
+Duomenų palaikymo (angl. maintenance) operacijos 
+&
+Nėra neįprasta turėti raportavimo ir atnaujinimo programas, kurios turi dirbti arba reguliariai, arba pagal poreikį. Tos programos, kurios veikia foniniu (angl. Background) režimu, kol kiti sistemos klientai normaliai dirba sus sistema, gali bandyti dirbti su dideliais kiekiais duomenų.
+\\
 \hline
 \end{tabular}
 
