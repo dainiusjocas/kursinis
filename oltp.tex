@@ -11,6 +11,7 @@
 \usepackage{tocloft}
 \usepackage{url}      % Kad url būtų tvarkingi
 \usepackage{parskip}
+\usepackage{longtable}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
@@ -55,25 +56,75 @@ OLTP sistemos projektuojamos tam, kad sugebėtų efektyviai apdoroti didelius tr
 The nature of OLTP environments is predominantly any kind of interactive ad hoc usage, such as telemarketeers entering telephone survey results. OLTP systems require short response times in order for users to remain productive.
 \end{comment}
 
-\begin{tabular}{|p{3.8cm}|p{9cm}|}
-\hline 
-\textbf{Savybė} & \textbf{Paaiškinimas} \\ 
+\begin{longtable}{|p{3cm}|p{9.8cm}|}
+\caption{OLTP sistemų savybės \label{table:oltpsavybes}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Savybė}} &
+{\textbf{Paaiškinimas}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Savybė}} &
+{\textbf{Paaiškinimas}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
 \hline 
 Greitas atsako laikas 
 &
- Visos OLTP sistemos yra kuriamos tam, kad jos būtų interaktyvios bei su jomis būtų galima dirbti pagal poreikį. OLTP sistemoms reikia trumpų atsako laikų, kad sistemos naudotojai išliktų produktyvūs. \\ 
+Visos OLTP sistemos yra kuriamos tam, kad jos būtų interaktyvios bei su jomis būtų galima dirbti tada, kada reikia. OLTP sistemoms reikia trumpų atsako laikų, kad sistemos naudotojai išliktų produktyvūs. \\ 
 \hline
 Smulkios transakcijos 
 &
- OLTP sistemos paprastai dirba tik su tam tikrais nedideliais duomenų kiekiais; duomenų apdorojimas dažniausiai yra paprastas, o sudėtingi DB\footnote{DB - santrumpa "Duomenų Bazė"} lentelių sujungimai yra naudojami palyginti retai. (angl. join)
+OLTP sistemos paprastai dirba tik su tam tikrais nedideliais duomenų kiekiais; duomenų apdorojimas dažniausiai yra paprastas, o sudėtingi DB lentelių sujungimai (angl. join) yra naudojami palyginti retai. 
 \\ 
 \hline
 Duomenų palaikymo (angl. maintenance) operacijos 
 &
-Nėra neįprasta turėti raportavimo ir atnaujinimo programas, kurios turi dirbti arba reguliariai, arba pagal poreikį. Tos programos, kurios veikia foniniu (angl. Background) režimu, kol kiti sistemos klientai normaliai dirba sus sistema, gali bandyti dirbti su dideliais kiekiais duomenų.
+Nėra neįprasta turėti ataskaitų rengimo ir duomenų atnaujinimo programas, kurios turi dirbti arba reguliariai, arba pagal poreikį. Tos programos, kurios veikia foniniu (angl. Background) režimu, kol kiti sistemos klientai normaliai dirba su sistema, gali bandyti dirbti su dideliais kiekiais duomenų, kurie yra toje pačioje DB.
 \\
 \hline
-\end{tabular}
+Daugelio naudotojų sistema
+&
+OLTP sistemos gali turėti labai daug naudotojų, kuriems gali reikėti tuo pačiu metu dirbti su tais pačiais duomenimis.
+\\
+\hline
+Intensyvus vienalaikiškumas
+&
+Dėl to, kad OLTP sistemos gali turėti daug klientų; joms reikia apdoroti didelius transakcijų kiekius, kuriuos reikia apdoroti per trumpą laiką, intensyvaus vienalaikiškumo palaikymas yra labai svarbus.
+\\
+\hline
+Dideli duomenų kiekiai
+&
+Priklausomai nuo programos tipo, klientų kiekio ir duomenų saugojimo laiko, OLTP sistemų dydis gali labai išaugti. Pavyzdžiui, elektroninės bankininkystės, klientas nori pamatyti visas savo paskutinių metų sąskaitas.
+\\
+\hline
+Pasiekiamumas
+&
+Pasiekiamumas OLTP sistemose turi būti nuolatinis. Laikinai nepasiekiama sistema gali paveikti didelį klientų skaičių, dėl kurio gali stipriai nukentėti visa kompanija.
+\\
+\hline
+Periodiniai naudojimo ypatumai
+&
+Gali nutikti taip, kad OLTP sistemų naudojamumas turi kažkokį cikliškumą. Pavyzdžiui, kiekvieno mėnesio gale yra apskaičiuojama visų banko sąskaitų suvestinė.
+\\
+\hline
+\end{longtable}
 
 \subsection{Realaus laiko veika}
 Realaus laiko veika reiškia, kad su kompiuterine sistema sąveikaujantys agentai tikisi sinchronizuoto atsako į savo veiksmus. Kitaip tariant, operacijos kompiuteryje turi būti atliekamos pakankamai sparčiai, kad jų rezultatai būtų pateikti laiku, kol dar yra aktualūs. Pavyzdžiui tarkime, kad mūsų kompiuterinė sistema yra skirta pardavinėti bilietus: kasininkė negali laukti valandos ar dviejų, kol sistema atliks bilieto pirkimo operacijas apie ką tik atliktą pardavimą, nes kasininkei reikia aptarnauti kitus bilieto laukiančius klientus, tačiau sistema turi nuolat dirbti su nujausia duomenų būsena, gauname išvadą, kad sistema turi atlikti reikalingas operacijas per griežtai apibrėžtą laiką. Realaus laiko veiką užtikrinančios sistemos yra sudėtingos, dėl joms keliamų reikalavimų.
@@ -102,8 +153,17 @@ V. Dagienė, G. Grigas, T. Jevsikova. Enciklopedinis kompiuterijos žodynas. 2-a
 \addcontentsline{toc}{section}{SĄVOKŲ APIBRĖŽIMAI}
 \section*{SĄVOKŲ APIBRĖŽIMAI}
 
+\textbf{Foninė programa (angl. background application, background program)} - Programa, nesanti veikiamajame lange.
+Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.
+
+\textbf{Klientas (angl. client)} - Aptarnaujamas asmuo: pirkėjas, užsakovas, abonentas, svetainės lankytojas arba kitokių paslaugų prašytojas bei vartotojas. Paprastai naudojasi kliento programa, kuri bendrauja su paslaugas teikiančia serverio programa.
+
+\textbf{Duomenų bazė (angl. database)} - Duomenų rinkinys, susistemintas ir sutvarkytas taip, kad juo būtų galima patogiai naudotis. Duomenys gali būti įvairūs: tekstai, paveikslai, garsai. Juos tvarko duomenų bazių valdymo sistema.
+
 \addcontentsline{toc}{section}{SANTRUMPOS}
 \section*{SANTRUMPOS}
+DB - duomenų bazė.
+OLTP - nuo angliško termino ,,Online Transactional Processing`` - tiesioginis transakcijų apdorojimas.
 \end{document}
 
 pasižiūrėt, kaip reikia dirbt su setcounter komanda.
