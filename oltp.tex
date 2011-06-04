@@ -12,6 +12,7 @@
 \usepackage{url}      % Kad url būtų tvarkingi
 \usepackage{parskip}
 \usepackage{longtable}
+\usepackage{graphicx}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 
@@ -49,6 +50,13 @@ Online transactional processing (OLTP) is designed to efficiently process high v
 
 Tiesioginio transakcijų apdorojimo (toliau OLTP\footnote{OLTP - dažnai naudojamas sutrumpinimas angliškam terminui ,,Online Transction Processing``, kuris reiškia ,,tiesioginis transakcijų apdorojimas``}) (angl. Online Transactional Processing) sistemos - sistemos, kurios palaiko operacinio lygio veiksmus t.y. registruoja kasdienines rutinines verslo operacijas, būtinas verslo sistemai funkcionuoti, o jų esminis bruožas yra realaus laiko\footnote{Realaus laiko arba tikralaikis(-ė) (angl. real time) - vykstantis kompiuteryje ir sąveikaujantis su tuo pat metu vykstančiais procesais kompiuterio išorėje.\cite{DGJ08}} veika.
 
+Pagrindinės OLTP sistemos dalys yra:
+\begin{itemize}
+	\item Grafinė vartotojo sąsaja;
+	\item Duomenų bazė;
+	\item Ataskaitų generavimo įrankis.
+\end{itemize}
+
 \subsection{OLTP sistemų savybės}
 
 OLTP sistemos projektuojamos tam, kad sugebėtų efektyviai apdoroti didelius transakcijų kiekius - realiu laiku apdorotų verslo įvykius (pvz. užregistruotų pirkimus) ir nuolat dirbtų su naujausiais duomenimis. Trumpai apžvelgsiu pagrindines OLTP sistemos savybes.\\
@@ -57,7 +65,7 @@ The nature of OLTP environments is predominantly any kind of interactive ad hoc 
 \end{comment}
 
 \begin{longtable}{|p{3cm}|p{9.8cm}|}
-\caption{OLTP sistemų savybės \label{table:oltpsavybes}}\\
+\caption{OLTP sistemų savybės\cite{UPI07} \label{table:oltpsavybes}}\\
 %This is the header for the first page of the table...
 
 \hline \hline
@@ -126,15 +134,140 @@ Gali nutikti taip, kad OLTP sistemų naudojamumas turi kažkokį cikliškumą. P
 \hline
 \end{longtable}
 
-\subsection{Realaus laiko veika}
-Realaus laiko veika reiškia, kad su kompiuterine sistema sąveikaujantys agentai tikisi sinchronizuoto atsako į savo veiksmus. Kitaip tariant, operacijos kompiuteryje turi būti atliekamos pakankamai sparčiai, kad jų rezultatai būtų pateikti laiku, kol dar yra aktualūs. Pavyzdžiui tarkime, kad mūsų kompiuterinė sistema yra skirta pardavinėti bilietus: kasininkė negali laukti valandos ar dviejų, kol sistema atliks bilieto pirkimo operacijas apie ką tik atliktą pardavimą, nes kasininkei reikia aptarnauti kitus bilieto laukiančius klientus, tačiau sistema turi nuolat dirbti su nujausia duomenų būsena, gauname išvadą, kad sistema turi atlikti reikalingas operacijas per griežtai apibrėžtą laiką. Realaus laiko veiką užtikrinančios sistemos yra sudėtingos, dėl joms keliamų reikalavimų.
+\subsection{Realaus laiko veika OLTP sistemose}
+Realaus laiko veika reiškia, kad su OLTP sistema sąveikaujantys agentai tikisi sinchronizuoto atsako į savo veiksmus. Kitaip tariant, operacijos sistemoje turi būti atliekamos pakankamai sparčiai, kad jų rezultatai būtų pateikti laiku, kol dar yra aktualūs. Pavyzdžiui tarkime, kad mūsų OLTP sistema yra skirta pardavinėti bilietus: kasininkė negali laukti valandos ar dviejų, kol sistema atliks bilieto pirkimo operacijas apie ką tik atliktą pardavimą, nes kasininkei reikia aptarnauti kitus bilieto laukiančius klientus, tačiau sistema turi nuolat dirbti su nujausia duomenų būsena, gauname išvadą, kad OLTP sistema turi atlikti reikalingas operacijas per griežtai apibrėžtą laiką. Realaus laiko veikos užtikrinimas yra vienas svarbiausių OLTP sistemų bruožų.
 
-\subsection{OLTP sistemų sandara}
-Pagrindinės tiesioginio transakcijų apdorojimo sistemos dalys yra:
+\section{OLTP palyginimas su OLAP sistemomis}
+
+Čia įdėsim aprašymą didžiųjų skirtumų iš http://krisvenky.tripod.com/id13.html
+
+\subsection{Kas yra duomenų sandėliai?}
+
+Duomenų sandėlis (angl. Data Warehouse) yra tiesiog viena, užbaigta (angl. complete) ir suderinta saugykla duomenų, surinktiems iš keletos skirtingų šaltinių, pateikimui galutiniams tos informacijos vartotojams tokiu būdu, kad ji jiems būtų suprantama ir naudojama jų veiklos kontekste. (Barry Devlin, IBM konsultantas)[EDW06].
+
+Duomenų sandėlis yra
 \begin{itemize}
-	\item Grafinė vartotojo sąsaja;
-	\item Reliacinė duomenų bazė;
+  \item Specifiškos paskirties (angl. Subject - oriented);
+  \item Integruotas, suderintas (angl. Integrated);
+  \item Nuo laiko priklausantis (angl. Time-varying) (sistemos darbo rezultatai priklausomi nuo to, kokiu laiko momentu sistema dirba. Šiuo atveju nuo sandėlyje esančių duomenų, nes jie laikas nuo laiko yra papildomi);
+  \item Ne laikinas (angl. Non-volatile).
 \end{itemize}
+
+duomenų rinkinys, kurio pirminis tikslas yra \textbf{organizuotas sprendimų priėmimas} (paremtas verslo sukauptais duomenimis).
+
+Pagrindinės duomenų sandėliu besinaudojančių programų klasės:
+\begin{itemize}
+  \item OLAP (angl. OnLine Analytical Processing) programos;
+  \item Duomenų gavybos (angl. Data Mining) programos;
+  \item Vizualizavimo (angl. Visualization) programos.
+\end{itemize}
+
+Duomenų sandėliai turi tris veiklos lygius:
+\begin{enumerate}
+  \item Neapdorotų duomenų lygis (angl. staging);
+  \item Integracijos lygis (angl. integration);
+  \item Duomenų pasiekimo lygis (angl. access).
+\end{enumerate}
+
+Alternatyvus duomenų sandėlio (angl. Data Warehouse) apibrėžimas – duomenų bazė skirta ruošti ataskaitas ir duomenų analizę bei ilgalaikiam duomenų saugojimui. Duomenys į duomenų sandėlį yra pakraunami iš sistemų naudojamų kasdienėm transakcijoms, t.y. OLTP sistemų. 
+
+\subsection{OLTP ir duomenų sandėlių skirtumai}
+
+\begin{longtable}{|p{3cm}|p{4.9cm}|p{4.9cm}|}
+\caption{OLTP sistemų ir duomenų sandėlių savybių palyginimas \label{table:oltpsvsdw}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Savybė}} &
+{\textbf{OLTP}} &
+{\textbf{Duomenų sandėlis}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{3}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Savybė}} &
+{\textbf{OLTP}} &
+{\textbf{Duomenų sandėlis}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{3}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+Paskirtis (angl. Workload)
+&
+Iš anksto apibrėžtos operacijos.
+&
+Operacijos pagal poreikį.
+\\
+\hline
+Duomenų redagavimas
+&
+Visada turi naujausius duomenis ir reaguoja į kiekvieną transakciją. Galutiniai vartotojai nuolat modifikuoja DB.
+&
+Reguliarus atnaujinimas pagal ETL (angl. Extract, Transform, Load) procesus. Galutinis naudotojas tiesiogiai nekeičia DB būsenos.
+\\
+\hline
+DB schema
+&
+Pilnai normalizuota, garantuojanti duomenų vientisumą, bei optimizuota duomenų atnaujinimo, įterpimo ištrynimo operacijoms.
+&
+Denormalizuota – optimizuota keletui svarbiausių operacijų.
+\\
+\hline
+Užklausų (angl. Queries) tipai
+&
+Užklausos naudoja nedaug ir tik reikalingus DB įrašus. Tipinė užklausa: „Gauti paskutinio kliento užsakymo duomenis“
+&
+Užklausos skenuoja tūkstančius arba milijonus eilučių. Tipinė užklausa: ,,Rasti sumą visų praėjusio mėnesio pasdavimų``
+\\
+\hline
+Istoriniai duomenys
+&
+Tipinis duomenų saugojimo laikas yra kelios savaitės ar mėnesiai. Saugoma tokia informacija, kurios reikia einamosios transakcijos įvykdymui.
+&
+Daug istorinių duomenų (mėnesiai, metai). To reikia, kad būtų galima atlikti išsamią duomenų analizę.
+\end{longtable}
+
+\subsection{Skirtumų apibendrinimas}
+
+Duomenų sandėliuose yra saugomi duomenys sugeneruoti OLTP sistemose, kuriuos prieš sukraunant į duomenų sandėlį reikia surinkti iš daugelio šaltinių, apdoroti ir pakrauti. Duomenų sandėliai yra skirti atlikti verslo duomenų analizes, tendencijų ieškojimui ir kitoms darbui su istoriniais duomenimis susijusioms operacijoms, o OLTP sistemos skirtos naujausių verslo duomenų apdorojimui.
+
+\begin{figure}[htb]
+\begin{center}
+\leavevmode
+\includegraphics[width=1\textwidth]{oltp_olap.png}
+\end{center}
+\caption{OLTP ir duomenų sandėlio struktūrinė schema.}
+\label{fig:awesome_image}
+\end{figure}
+
+\newpage
+
+\section{Šiandienos aktualijos OLTP sistemų pasaulyje}
+
+Vis daugiau ir daugiau programų šiandien veikia tiesiog interneto naršyklėje:
+\begin{itemize}
+  \item Internetinės parduotuvės (pvz. „iTunes“);
+  \item Elektroninio pašto klientai (pvz. „Gmail“);
+  \item Socialinės programos (pvz. „Facebook“);
+  \item Duomenų apdorojimo programos (pvz. „Google Docs“);
+  \item Žaidimai (pvz. „Angry Birds“);
+  \item Verslo sistemos (pvz. „erpnext“) ir t.t.
+\end{itemize}
+
+Tačiau, kad ir kokį gerą interneto ryšį turėtume, mes negalima garantuoti, kad mes juo visada galėsime naudotis, o jei ir galėsime, galbūt jis tiesiog bus nepakankamas, kad galėtume naudotis patogiai, pvz. naudojamės mobiliuoju internetu, tačiau nuvažiavus į kalnus ryšio signalas tampa labai silpnas, smarkiai sumažėja mobilaus interneto greitis ir mes nebegalime išnaudoti kelių leisvų minučių žaisdami savo pamėgtojo „Angry Birds“ žaidimo internetinės versijos. Žinoma, kad dažniausiai galime turėti panašios paskirties programą pilnai įrašytą į kompiuterio atmintį, bet pasaulinė tendencija yra tokia, kad stipriai populiarėja taip vadinama „debesų kompiuterija“ (angl. Cloud computing) ir su ja susiję programiniai sprendimai. Atsiranda realus poreikis turėti mišraus veikimo programas tokias, kurių prigimtis yra internetinė, tačiau gal viekti ir nesant arba esant tik labai silpnam interneto ryšiui. 
+Pradinė interneto naršyklių idėja buvo peržiūrėti duomenis esančius kažkur nutolusiame interneto serveryje, o tam būtinai reikia interneto ryšio. Kaip jau minėjome anksčiau, yra poreikis peržiūrėti tuos pačius duomenis ir kai nėra interneto ryšio. Kyla problema, kaip pasiekti nepasiekiamus duomenis? Sprendimas yra gana paprastas – reikia padaryti duomenis visada pasiekiamus - įrašyti būtinus internetinės aplikacijos duomenis vartotojo kompiuteryje. (Bet tada interneto naršyklė tampa nebe interneto naršykle, o tiesiog naršykle, nes gali naršyti, ne tik internetą, bet ir (kažkokiame lygyje) kliento kompiuterį.) Technologijų leidžiančių tokias programas kurti jau yra, kaip jau minėta, yra ir poreikis tokioms programoms. Kita darbo dalis bus susijusi su istorine apžvalga bei raidos perspektyvomis technologijų, leidusių įrašyti duomenis į kliento kietajį diską ir taip leidusių dalį internetinės aplikacijos veikimo perkelti į kliento kompiuterį. 
 
 \addcontentsline{toc}{section}{REZULTATAI IR IŠVADOS}
 \section*{REZULTATAI IR IŠVADOS}
@@ -148,13 +281,21 @@ Pagrindinės tiesioginio transakcijų apdorojimo sistemos dalys yra:
 \bibitem[DGJ08]{DGJ08} 
 V. Dagienė, G. Grigas, T. Jevsikova. Enciklopedinis kompiuterijos žodynas. 2-as papildytas leidimas. Vilnius: TEV, 2008, 654 p. Žiūrėta[2011-05-29] Prieiga per internetą:\url{http://www.likit.lt/term/enc.html}
 
+\bibitem[UPI07]{UPI07} % Keista klaida: nerodo pirmos raidės!!!
+ UUsing Partitioning in an Online Transaction Processing Environment. 2007. [Žiūrėta: 2011-06-01]. Prieiga per internetą: \url{http://download.oracle.com/docs/cd/B28359_01/server.111/b32024/part_oltp.htm}
+ 
+\bibitem[EDW06]{EDW06} 
+Enterprise Data Warehouse (EDW). 2006. [Žiūrėta: 2011-06-01]. Prieiga per internetą: \url{http://edw.berkeley.edu/documents/Enterprise%20Data%20Warehouse%20brown%20bag%20-%2010-5-06.pdf}
+
 \end{thebibliography}
 
 \addcontentsline{toc}{section}{SĄVOKŲ APIBRĖŽIMAI}
 \section*{SĄVOKŲ APIBRĖŽIMAI}
 
+\textbf{Duomenų gavyba (angl. data mining)} - duomenų išgavimas iš duomenų bazės, žiniatinklio arba kitokios didelės kompiuterinės duomenų saugyklos panaudojant asociacijos, statistikos, klasifikacijos, segmentavimo, įvairius euristinius metodus. Naudojama kai operuojama dideliais duomenų kiekiais ir sunku apibrėžti paieškos kriterijus.[DGJ08]
+
 \textbf{Foninė programa (angl. background application, background program)} - Programa, nesanti veikiamajame lange.
-Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.
+Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.[DGJ08]
 
 \textbf{Klientas (angl. client)} - Aptarnaujamas asmuo: pirkėjas, užsakovas, abonentas, svetainės lankytojas arba kitokių paslaugų prašytojas bei vartotojas. Paprastai naudojasi kliento programa, kuri bendrauja su paslaugas teikiančia serverio programa.
 
@@ -163,7 +304,9 @@ Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.
 \addcontentsline{toc}{section}{SANTRUMPOS}
 \section*{SANTRUMPOS}
 DB - duomenų bazė.
+OLAP (angl. Online Analytical Processing) – tai technologija, leidžianti greitai, realiame laike ir įvairiais įmanomais pjūviais peržiūrėti informaciją, naudojant duomenų modelį, kuris atspindi realų organizacijos veiklos vaizdą, kaip jį supranta vartotojas, t. y. organizacijos duomenų atvaizdas yra daugiamatis.
 OLTP - nuo angliško termino ,,Online Transactional Processing`` - tiesioginis transakcijų apdorojimas.
 \end{document}
+
 
 pasižiūrėt, kaip reikia dirbt su setcounter komanda.
