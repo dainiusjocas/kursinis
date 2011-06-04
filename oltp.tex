@@ -254,7 +254,7 @@ Duomenų sandėliuose yra saugomi duomenys sugeneruoti OLTP sistemose, kuriuos p
 
 \newpage
 
-\section{Šiandienos aktualijos OLTP sistemų pasaulyje}
+\section{OLTP sistemų tendencijos}
 
 Vis daugiau ir daugiau programų šiandien veikia tiesiog interneto naršyklėje:
 \begin{itemize}
@@ -266,8 +266,232 @@ Vis daugiau ir daugiau programų šiandien veikia tiesiog interneto naršyklėje
   \item Verslo sistemos (pvz. „erpnext“) ir t.t.
 \end{itemize}
 
-Tačiau, kad ir kokį gerą interneto ryšį turėtume, mes negalima garantuoti, kad mes juo visada galėsime naudotis, o jei ir galėsime, galbūt jis tiesiog bus nepakankamas, kad galėtume naudotis patogiai, pvz. naudojamės mobiliuoju internetu, tačiau nuvažiavus į kalnus ryšio signalas tampa labai silpnas, smarkiai sumažėja mobilaus interneto greitis ir mes nebegalime išnaudoti kelių leisvų minučių žaisdami savo pamėgtojo „Angry Birds“ žaidimo internetinės versijos. Žinoma, kad dažniausiai galime turėti panašios paskirties programą pilnai įrašytą į kompiuterio atmintį, bet pasaulinė tendencija yra tokia, kad stipriai populiarėja taip vadinama „debesų kompiuterija“ (angl. Cloud computing) ir su ja susiję programiniai sprendimai. Atsiranda realus poreikis turėti mišraus veikimo programas tokias, kurių prigimtis yra internetinė, tačiau gal viekti ir nesant arba esant tik labai silpnam interneto ryšiui. 
+Tačiau, kad ir kokį gerą interneto ryšį turėtume, mes negalima garantuoti, kad mes juo visada galėsime naudotis, o jei ir galėsime, galbūt jis tiesiog bus nepakankamas, kad galėtume naudotis patogiai, pvz. naudojamės mobiliuoju internetu, tačiau nuvažiavus į kalnus ryšio signalas tampa labai silpnas, smarkiai sumažėja mobilaus interneto greitis ir mes nebegalime išnaudoti kelių leisvų minučių žaisdami savo pamėgtojo „Angry Birds“ žaidimo internetinės versijos. Žinoma, kad dažniausiai galime turėti panašios paskirties programą pilnai įrašytą į kompiuterio atmintį, bet pasaulinė tendencija yra tokia, kad stipriai populiarėja taip vadinama „debesų kompiuterija“ (angl. Cloud computing) ir su ja susiję programiniai sprendimai. Atsiranda realus poreikis turėti mišraus veikimo programas tokias, kurių prigimtis yra internetinė, tačiau jos gali viekti ir nesant arba esant tik labai silpnam interneto ryšiui. 
+
 Pradinė interneto naršyklių idėja buvo peržiūrėti duomenis esančius kažkur nutolusiame interneto serveryje, o tam būtinai reikia interneto ryšio. Kaip jau minėjome anksčiau, yra poreikis peržiūrėti tuos pačius duomenis ir kai nėra interneto ryšio. Kyla problema, kaip pasiekti nepasiekiamus duomenis? Sprendimas yra gana paprastas – reikia padaryti duomenis visada pasiekiamus - įrašyti būtinus internetinės aplikacijos duomenis vartotojo kompiuteryje. (Bet tada interneto naršyklė tampa nebe interneto naršykle, o tiesiog naršykle, nes gali naršyti, ne tik internetą, bet ir (kažkokiame lygyje) kliento kompiuterį.) Technologijų leidžiančių tokias programas kurti jau yra, kaip jau minėta, yra ir poreikis tokioms programoms. Kita darbo dalis bus susijusi su istorine apžvalga bei raidos perspektyvomis technologijų, leidusių įrašyti duomenis į kliento kietajį diską ir taip leidusių dalį internetinės aplikacijos veikimo perkelti į kliento kompiuterį. 
+
+\section{Senesnės technologijos internetinių programų duomenų saugojimui kliento kompiuteryje}
+
+\subsection{Slapukai (angl.cookies)}
+
+Interneto svetainės naudoja slapukus, kad galėtų pasiūlyti personalizuotą naudojimo patirtį vartotojams ir surinkti informaciją apie svetainės naudojimą. Daugelis svetainių taip pat naudoja slapukus, kad galėtų saugoti informaciją, kuri padeda nuosekliai naudoti svetainės dalis, pvz., parduotuvės krepšelį arba tinkintus puslapius. Patikimoje svetainėje slapukas gali pagerinti darbą leisdamas svetainei sužinoti kliento prioritetus arba praleisti prisijungimo etapą kaskart, kai einate į jau lankytą interneto svetainę. Tačiau kai kurie slapukai, pvz., įrašyti reklaminių antraščių, gali kelti grėsmę privatumui ir sekti lankomas svetaines.
+
+Slapukų idėja yra gana sena – ji kilo Lou Montulli, o  pirma slapukų specifikacija išleista 1994 metais spalio 13. Technologijos tikslas – kliento kompiuteryje saugoti informaciją susijusią su naršymu tinklalapyje. Tuo metu, kada atsirado cookies, daugelis web aplikacijų juos naudodavo tik su identifikacija susijusių duomenų saugojimui, kai tuo tarpu visi kiti duomenys susiję su klientu buvo saugomi serveryje. Kadangi cookie‘s yra tekstiniai jie nėra vykdomieji failai, todėl jie negali daugintis ir negali būti virusais. Naršyklė serveriui siunčia tik „rakto -> reikšmės“ (angl. „name<->value“) porą, o visi kiti atributai yra naudojami cookie ištrynimo datai apskaičiuoti. Duomenų, saugomų cookies pavidalu kiekis yra labia mažas, tačiau tai vis tiek yra offline starage klasės technologija.
+
+\begin{longtable}{|p{4cm}|p{8.8cm}|}
+\caption{Slapukų rūšys \label{table:slapuku_rušys}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Rūšis}} &
+{\textbf{Veikimo pobūdis}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Rūšis}} &
+{\textbf{Veikimo pobūdis}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+Laikinieji arba seanso  (angl. Session Cookie)
+&
+Tokio tipo slapukas yra aktyvus tol kol, klientas prisijungęs prie portalo arba, jei nustatyta, gali gyvuoti dar tam tikrą laiko tarpą iki kito puslapio aplankymo, bet, jei apsilankymas neįvyksta per tam tikrą laiką, jis automatiškai yra ištrinamas.
+\\
+\hline
+Nuolatiniai arba įrašytieji (angl. Persistent Cookie)
+&
+Kiekvieną kartą klientui prisijugus prie serverio slapukas yra siunčiamas klientui, taip galima skaičiuoti, kiek kartų vartotojas apsilankė portale.
+\\
+\hline
+Saugusis (angl. Secure Cookie)
+&
+Naudojamas tik jungiantis per httpsi protokolą ir slapuko turinys yra užšifruotas tam, kad būtų mažesnė tikimybė nukentėti nuo duomenų vagystės.
+\\
+\hline
+Tik http (angl. HttpOnly Cookie)
+&
+Šiuo slapuku gali naudotis tik HTTP (ar HTTPS) tipo jungtis ir slapuko turinys yra nepasiekiamas kliento skriptams, taip slapukas yra apsaugotas nuo skriptinių atakų.
+\\
+\hline
+Trečiosios šalies (angl. Third-Party Cookie)
+&
+Šio tipo slapukai gaunami iš kitų svetainių reklaminių skelbimų (pvz., iššokančių reklamų arba reklaminių antraščių), esančių rodomoje svetainėje. Svetainės gali naudoti šiuos slapukus rinkodaros tikslais ir žiniatinklio naudojimui sekti.
+\\
+\hline
+Super (angl. Super Cookie)
+&
+Įrašo tik aukšto lygio domenus „.com“ ir tokiu būdu gali trikdyti naudojimąsi internetu. Naršyklės turi sąrašus neleistinų super slapukų, kuris yra nuolat atnaujinamas.
+\\
+\hline
+Zombis (angl. Zombie Cookie)
+&
+Šio tipo slapukai atsikuria save po to kai buvo ištrinti (atkuriantis skriptas gali būti laikomas Flash lokalių duomenų saugykloje).
+\end{longtable}
+
+\subsection{JavaScript ir failai vartotojo kompiuteryje}
+
+JavaScript – objektiškai orientuota skriptų programavimo kalba. Ji dažniausiai yra naudojama internetinių puslapių interaktyvumo realizacijai. Javascript kodas negali pasiekti kliento kompiuterio failų sistemos. JavaScript kodas gali manipuliuoti failais kurie buvo įtempti (angl. Drag and Drop) į naršyklę. Taip pat yra galimybė įrašyti failą į kompiuterio atmintį, tačiau klientas turi užbaigti išsaugojimo (angl. Sava As..) dialogą. Taip yra dėl to, kad JavaScript kodas veikia savotiškame smėlio dėžės (angl. Sandbox) režime. Smėio dėžės režimas naudojamas kaip būdas apsaugoti kliento kompiuterį nuo kenksmingų internetinių atakų.
+
+Nors JavaScript kodas veikia smėlio dėžės režimu, tačiau su tokiu režimu derinasi ir su internetiniu domenu susijusios lokalios failinės sistemos koncepsija. Ateityje turėtų atsirasti galimybė pilnai dirbti su failais susietais su konkrečiu domenu. Ši koncepsija leis kliento kompiueryje sukurti failinę strukturą, kuri bus pasiekiama per interneto naršyklę tik tada kai bus prisijungta prie domeno, kurio vardu toji failinė sistema buvo sukurta.
+
+\subsection{Papildiniais (angl. Plugin) grįstos technologijos}
+
+Šiame skyriuje nagrinėsime technologijas leidžiančias web aplikacijoms pasiekti failus kliento kompiuteryje. Jų yra trys:
+\begin{itemize}
+  \item Flash;
+  \item Java apletai;
+  \item ,,Google Gear``.
+\end{itemize}
+
+Taip pat aptarsiu bendrus įskiepių naudojimo trūkumus, bei aprašysiu atskirų naršyklių bandymus dirbti su failų pasiekiamumu kliento atmintinėje.
+
+\subsubsection{,,Flash``}
+
+Nuo 6 Flash versijos atsirado “lokalaus bendro naudojimo objekto” (angl. Local shared object) koncepsija. Lokalus bendro naudojimo objektas dar yra vadinamas “Flash slapuku”, taip yra dėl to, kad jų paskirtis kaip ir paprastų slapukų yra saugoti duomenis susijusius su internetiniu puslapiu vartotojo kompiuteryje. Didžiausias skirtumas yra tas, kad lokalaus bendro naudojimo objektas yra sukuriamas tik puslapių naudojančių Flash technologijas ir lokaliai gali būti naudojamas tik Flash įskiepius turinčiose sistemose. Taip pat jų naudojimo nustatymai yra nepriklausomi nuo paprastųjų slapukų naudojimo nustatymų, tai reiškia, kad net, jei paprastieji slapukai yra griežtai draudžiami, lokalūs bendronaudojimo objektai gali būti naudojami. 
+
+Saugomų duomenų pobūdis yra šiek tiek platesnis negu paprastų slapukų atveju. Dažniausiai yra saugomi vartotojo nustatymai. Jei yra naudojami standartiniai lokalaus bendro naudojimo objekto nustatymai, tuomet kliento nėra klausiama ar naudoti šio tipo atmintinę. Taip pat standartinis duomenų kiekis saugomas lokaliame bendro naudojimo objekte yra 100 kB, tačiau esant reikalui šis dydis gali būti keičiamas. 
+
+\begin{longtable}{|p{6.4cm}|p{6.4cm}|}
+\caption{Lokalaus bendro naudojimo objekto privalumai ir trūkumai \label{table:flash}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Privalumai}} &
+{\textbf{Trūkumai}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Privalumai}} &
+{\textbf{Trūkumai}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+\begin{itemize}
+  \item Jis yra tinkamas saugoti duomenis susijusius su transakcijomis, nes gali saugoti ir sudėtingesnės struktūros negu paprastas tekstas duomenis;
+  \item Jo dydis gali būti plečiamas;
+  \item Technologija yra gana plačiai paplitusi, nes dauguma Windows OS naudotojų turi Flash įskiepius.
+\end{itemize}
+&
+\begin{itemize}
+  \item Mažai žinomas, todėl prastai kontroliuojamas;
+  \item Tik Google Chrome naršyklė turi modulius leidžiančius pilnai kontroliuoti veikimą;
+  \item Įvairūs saugumo klausimai;
+  \item Gali būti naudojamas kenkėjiškai veiklai (Pavyzdžiui, lokalus bendro naudojimo objektas gali būti kaip atsarginė paprasto slapuko kopija skirta atkurti tą slapuką, kai jis yra ištrinamas);
+  \item Nėra globalus standartas;
+\end{itemize}
+\end{longtable}
+Nors ši technologija yra gana dažnai kritikuojama dėl saugumo problemų, ją kuriančios kompanijos Adobe Inc. vadovai nuolat pabrėžia, kad ši technologija nebuvo projektuojama kaip grėsmę galintis kelti įrankis. Tai galime matyti ir iš lokalaus bendro naudojimo objekto naudojimo schemos.
+
+\begin{figure}[htb]
+\begin{center}
+\leavevmode
+\includegraphics[width=1\textwidth]{flash.png}
+\end{center}
+\caption{Lokalaus bendro naudojimo objekto naudojimo schema.}
+\label{fig:flash}
+\end{figure}
+
+\subsubsection{Java programėlės}
+
+Viena iš Java programavimo kalbos galimybių yra apletų rašymas. Java apletai tai yra speciali Java programų grupė, kuri gali būti atsisiųsta iš internet ir įvykdyta aktyvų Java įskiepį turinčioje naršyklėje. Java kaip ir absoliuti dauguma programavimo kalbų turi galimybę skaityti ir rašyti failus į kliento kompiuterį. Apletų naudojimas yra patrauklus tuo, kad jie yra daug spartesni už JavaScript kodą, bei gali geriau išnaudoti kliento kompiuterio resursus. Dėl ypatingos apletų technologijos jie gali iškviesti JavaScript kodą, o savo rouštu JavaScript kodas gali iškviesti apletus. Kadangi apletai yra galingi tiek pat kaip ir kitos Java programos, jų naudojimą reikia riboti, nes dėl netinkamo jų naudojimo gali iškilti daugybė problemų, todėl patartina leisti įvykdyti apletus atsisiųstus tik iš patikimų internetinių puslapių. Java technologijų naudojimas gali būti išeitis, kai norima turėti galimybę dirbti su duomenis esančiais kliento kompiuteryje.
+
+\subsubsection{,,Google Gears``}
+
+„Google Gears“ interneto naršyklės įskiepis, kuris įgalina kurti funkcionalesnes web aplikacijas, kurių dalis funkcionalumo yra pasiekiama neprisijungus prie interneto ryšio.
+„Google Gears“ plėtojimas nutrūko, nes buvo nuspręsta turėtą įdirbį bei sukauptą patirtį investuoti į bendrų interneto standartų plėtojimą. Dauguma idėjų (lokali duomenų bazė, geolokacija ir t.t.), kurias plėtojant „Google Gears“ buvo pionierius, perima arba ateityje perims HTML5 ir kiti interneto standartai.
+
+\subsubsection{Papildinių naudojimo trūkumai}
+
+Akivaizdžiausias trūkumas yra tai, kad aplikacijos kūrėjas turi tikėtis, kad klientas turėsis instaliuotą papildinį ir jis bus tinkamos naudoti versijos. Tačiau to tikėtis yra gana sudėtinga, nes pvz. Kompanijos neretai turi ugniasienes, kurios blokuoja papildinius, arba dar blogiau – papildiniai gali būti nepritaikyti veikti su visomis operacinėmis sistemomis. Dar daugiau, aplikacijų kūrėjas turi tikėtis, kad papildinius kurianti kompanija nenutrauks jų kūrimo, bei sieks jį populiarinti. Taipogi, yra grėsmė, kad papildiniais grįstas technologijas pakeis su jais nesuderinami atviri standartai, kas dabar ir vyksta.
+
+Tačiau gali būti ir tokių atvejų, kada papildinių naudojimas teiktų privalumus. Pavyzdžiui, įmonė sukūrė kažkokią paslaugą, kuri yra vertinga ir veikia kažkokio tai papildinio pagrindu. Jei klientams tikrai reikia tos paslaugos, tai jie gali įsidiegti reikalaujamus papildinius ir sėkmingai naudotis tomis paslaugomis. Tad papildinių naudojimas nors ir su akivaizdžiais savo trūkumais gali suteikti privalumų sunkiai pasiekiamų jų nenaudojant.
+
+\subsubsection{Specifinės naršyklių savybės}
+
+Darbo su kliento kompiuterio failine sistema specifinius modulius turi ir keletas naršyklių. 
+
+\begin{longtable}{|p{2cm}|p{3cm}|p{7.8cm}|}
+\caption{Specifinės naršyklių savybės darbui su kliento failine sistema \label{table:naršyklės}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Naršyklė}} &
+{\textbf{Technologija}} &
+{\textbf{Aprašymas}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{3}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Naršyklė}} &
+{\textbf{Technologija}} &
+{\textbf{Aprašymas}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{3}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+,,Internet Explorer``
+&
+,,UserData API``
+&
+Ši technologija leidžia saugoti ir naudoti duomenis tarp atskirų prisijungimų prie internetinės aplikacijos kliento duomenų saugykloje (angl. UserData Store). Technologija įgalina saugoti ir naudoti sudėtingas ir dinamiškas duomenų struktūras, kurių dydis yra didesnis negu leidžia slapukai. Kliento duomenų saugyklos dydis priklauso nuo to, kokiame saugumo lygyje yra dirbama, tačiau vidutiniai atminties dydžiai yra 128 KB per failą ir 1024 KB bendros atminties.
+\\
+\hline
+,,Firefox``
+&
+XPCOM (angl. Cross Platform Component Object Model)
+&
+Tai galingas modelis (angl. Framework) skirtas multiplatforminės ir modulinės architektūros programų kūrimui. Šios platformos pagrindu yra sukurta pati “Firefox” naršyklė. Ši naršyklė yra gera tuo, kad jai galima rašyti įvairius įskiepius (angl. Add-ons), kurie gali išnaudoti XPCOM suteikiamus API, tame tarpe ir darbo su failais modulius. Gaunamos iš esmės neribotos galimybės.
+\end{longtable}
+
+Tačiau visos šios specifinės naršyklių technologijos turi keletą esminių trūkumų:
+\begin{itemize}
+  \item Aplikacija pritaikyta dirbti su specifiniais moduliais, veiks geriausiu atveju tik keletoje naršyklių;
+  \item Naršyklės kūrėjas gali nutraukti modulio palaikymą;
+  \item Jei naršyklė bando pasinaudoti tais moduliais (tarkim naujesnė naršyklės versija, kuri jau nebepalaiko tų modulių), bet jiems nėra pritaikyta, tada reikia pasikliauti Java apletais, kurie irgi turi visokių neigiamų savybių aptartų anksčiau.
+  \item Technologijos gali būti prastai dokumentuotos;
+  \item Technologijos greičiausiai yra nepopuliarios.
+\end{itemize}
+
 
 \addcontentsline{toc}{section}{REZULTATAI IR IŠVADOS}
 \section*{REZULTATAI IR IŠVADOS}
@@ -293,6 +517,11 @@ Enterprise Data Warehouse (EDW). 2006. [Žiūrėta: 2011-06-01]. Prieiga per int
 \section*{SĄVOKŲ APIBRĖŽIMAI}
 
 \textbf{Duomenų gavyba (angl. data mining)} - duomenų išgavimas iš duomenų bazės, žiniatinklio arba kitokios didelės kompiuterinės duomenų saugyklos panaudojant asociacijos, statistikos, klasifikacijos, segmentavimo, įvairius euristinius metodus. Naudojama kai operuojama dideliais duomenų kiekiais ir sunku apibrėžti paieškos kriterijus.[DGJ08]
+
+\textbf{Papildinys (angl. add on; add-in; plug-in; plugin} - papildomas komponentas, įtaisytas į programą, kompiuterį arba jo įtaisą ir išplečiantis jo galimybes.[DGJ08]
+
+\textbf{Programėlės (angl. applet)} - Nedidelė programa, kuri yra serveryje ir gali būti iškviesta iš tinklalapio. Vykdoma kliento naršyklėje.
+Programėlės dažniausiai rašomos Javos kalba. Tam, kad jos galėtų būti vykdomos, naršyklė turi būti suderinama su Java ir parinkta atitinkama programėlių vykdymo nuostata. Javos programėlės pasižymi tuo, kad gali pagyvinti tinklalapį, suteikti jam dinamiškumo ir gali būti vykdomos įvairiose operacinėse sistemose.[DGJ08]
 
 \textbf{Foninė programa (angl. background application, background program)} - Programa, nesanti veikiamajame lange.
 Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.[DGJ08]
