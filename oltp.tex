@@ -272,7 +272,7 @@ Pradinė interneto naršyklių idėja buvo peržiūrėti duomenis esančius kaž
 
 \section{Senesnės technologijos internetinių programų duomenų saugojimui kliento kompiuteryje}
 
-\subsection{Slapukai (angl.cookies)}
+\subsection{Slapukai (angl. cookies)}
 
 Interneto svetainės naudoja slapukus, kad galėtų pasiūlyti personalizuotą naudojimo patirtį vartotojams ir surinkti informaciją apie svetainės naudojimą. Daugelis svetainių taip pat naudoja slapukus, kad galėtų saugoti informaciją, kuri padeda nuosekliai naudoti svetainės dalis, pvz., parduotuvės krepšelį arba tinkintus puslapius. Patikimoje svetainėje slapukas gali pagerinti darbą leisdamas svetainei sužinoti kliento prioritetus arba praleisti prisijungimo etapą kaskart, kai einate į jau lankytą interneto svetainę. Tačiau kai kurie slapukai, pvz., įrašyti reklaminių antraščių, gali kelti grėsmę privatumui ir sekti lankomas svetaines.
 
@@ -348,7 +348,7 @@ JavaScript – objektiškai orientuota skriptų programavimo kalba. Ji dažniaus
 
 Nors JavaScript kodas veikia smėlio dėžės režimu, tačiau su tokiu režimu derinasi ir su internetiniu domenu susijusios lokalios failinės sistemos koncepsija. Ateityje turėtų atsirasti galimybė pilnai dirbti su failais susietais su konkrečiu domenu. Ši koncepsija leis kliento kompiueryje sukurti failinę strukturą, kuri bus pasiekiama per interneto naršyklę tik tada kai bus prisijungta prie domeno, kurio vardu toji failinė sistema buvo sukurta.
 
-\subsection{Papildiniais (angl. Plugin) grįstos technologijos}
+\subsection{Papildiniais (angl. plugin) grįstos technologijos}
 
 Šiame skyriuje nagrinėsime technologijas leidžiančias web aplikacijoms pasiekti failus kliento kompiuteryje. Jų yra trys:
 \begin{itemize}
@@ -434,7 +434,7 @@ Akivaizdžiausias trūkumas yra tai, kad aplikacijos kūrėjas turi tikėtis, ka
 
 Tačiau gali būti ir tokių atvejų, kada papildinių naudojimas teiktų privalumus. Pavyzdžiui, įmonė sukūrė kažkokią paslaugą, kuri yra vertinga ir veikia kažkokio tai papildinio pagrindu. Jei klientams tikrai reikia tos paslaugos, tai jie gali įsidiegti reikalaujamus papildinius ir sėkmingai naudotis tomis paslaugomis. Tad papildinių naudojimas nors ir su akivaizdžiais savo trūkumais gali suteikti privalumų sunkiai pasiekiamų jų nenaudojant.
 
-\subsubsection{Specifinės naršyklių savybės}
+\subsection{Specifinės naršyklių savybės}
 
 Darbo su kliento kompiuterio failine sistema specifinius modulius turi ir keletas naršyklių. 
 
@@ -485,31 +485,208 @@ Tai galingas modelis (angl. Framework) skirtas multiplatforminės ir modulinės 
 
 Tačiau visos šios specifinės naršyklių technologijos turi keletą esminių trūkumų:
 \begin{itemize}
-  \item Aplikacija pritaikyta dirbti su specifiniais moduliais, veiks geriausiu atveju tik keletoje naršyklių;
+  \item Programa pritaikyta dirbti su specifiniais moduliais, veiks geriausiu atveju tik keletoje naršyklių;
   \item Naršyklės kūrėjas gali nutraukti modulio palaikymą;
-  \item Jei naršyklė bando pasinaudoti tais moduliais (tarkim naujesnė naršyklės versija, kuri jau nebepalaiko tų modulių), bet jiems nėra pritaikyta, tada reikia pasikliauti Java apletais, kurie irgi turi visokių neigiamų savybių aptartų anksčiau.
+  \item Jei naršyklė bando pasinaudoti tais moduliais (tarkim naujesnė naršyklės versija, kuri jau nebepalaiko tų modulių), bet jiems nėra pritaikyta, tada reikia pasikliauti Java apletais, kurie irgi turi įvairių neigiamų jau aptartų savybių.
   \item Technologijos gali būti prastai dokumentuotos;
   \item Technologijos greičiausiai yra nepopuliarios.
 \end{itemize}
 
+\section{HTML5 standarto naujovės susijusios su tiesioginiu transakcijų apdorojimu}
+
+HTML5 standartas turi visą klasę naujovių pavadintų ,,Darbas atsijungus ir atmintinė`` (angl. offline \& storage). Šią klasę sudaro keletas naujų standartų: 
+\begin{itemize}
+  \item Programų podėlis (angl. application cache);
+  \item Vidinė atmintinė (angl. local storage, web storage);
+  \item Saityno SQL duomenų bazė (angl. web SQL database)
+  \item Indeksuota duomenų bazė (angl. indexed database);
+  \item Failų API\footnote{API (angl. Application Program Interface) - programų sąsaja.} sąsaja (angl. File API).
+\end{itemize}
+Visos šios technologinės naujovės įgalina kurti internetines programas, kurias būtų galima priskirti OLTP klasei. Dar daugiau, šios technologijos iš dalies išsprendžia klausimą, kaip panaudoti internetines programas, kai nėra interneto ryšio. Tolesniuose skyriuose bus trumpa šių technologijų apžvalga.
+
+\subsection{Programų podėlis (anlg. application cache)}
+
+Vis didesnę svarbą turi internetinės programos, todėl darbas su jomis atsijungus prie interneto yra galimybė tas programas dar labiau pagerinti. Nors dauguma naršyklių turi padėjimo (angl. caching) mechanizmus, tačiau jie ne visada veikia taip kaip tikimasi. Šiaip problemai spręsti HTML5 standarto kūrėjai siūlu naudoti programų podėlio suteikiamas galimybes. 
+
+Pagrindiniai privalumai, kuriuos sutekia ši technologija yra:
+\begin{itemize}
+  \item Naršymas neprisijungus – galima naršyti internetinius puslapius neprisijungus prie interneto;
+  \item Greitis – užkešuoti resursai yra pakraunami iš vietinės atmintinės, todėl yra greitesni;
+  \item Sumažinta serverių apkrova – serveriui reikia siųsti tik tuos failus, kurie buvo modifikuoti arba, kurių nėra prasmės saugoti kliento kompiuteryje.
+\end{itemize}
+Pagrindinė šios technologijos savybė yra ta, kad programuotojas gali pasakyti naršyklei, kuriuos failus reikia padėti kliento kompiuteryje. Tai yra padaroma labai paprastu būdu:
+\begin{enumerate}
+  \item Internetinio puslapio ,,html`` žymėje reikia nurodyti manifesto failą;
+  \item Manifesto faile reikia nurodyti failus, kuriuos reikia užkešuoti.
+\end{enumerate}
+Šios technologijos pritaikymas daugausia naudos duoda vartotojo grafinei sąsajai sukurti, kol yra nepasiekiamas serveris, o pati technologija nieko nesako apie transakcijų palaikymą. Šiai problemai spręsti yra sukurtos kitos technologijos.
+
+\subsection{Vidinė atmintinė (angl. local storage)}
+
+Dar ši technologija vadinams „DOM Storage“. Vietinė atmintinė gali būti supaprastintai suprasta kaip slapukų išplėtimas pridedant didesnės atminties palaikymą ir supaprastinant darbo su ta atmintine interfeisą. Kaip ir slapukų atveju vietinės atmintinės duomenys yra paprasti simbolinio tipo duomenys, kurie yra organizuojami atvaizdžio (ang. Map) principu – raktas-reikšmė. Tačiau iš tikrųjų ši technologija skiriasi keletu esminių aspektų, apie kuriuos iš eilės. 
+
+Lokali saugykla yra skirstoma į dvi dalis: sesijos (ang. session) ir nuolatinės (angl. local) saugyklos. Sesijos atmintinė yra naudojama, kol klientas yra prijungtas prie internetinio puslapio arba kol internetinis puslapis (ar naršyklės kortelė, ar naršyklės langas) nėra uždarytas. Kai puslapis yra uždaromas visa atmintis sukaupta sesijos atmintinėje yra ištrinama. Nuolatinės saugyklos atveju atmintinėje esantys duomenys nėra ištrinami uždarius internetinį puslapį – ji lieka kliento kompiuterio atmintinėje tarp naršyklės sesijų, todėl tinka duomenų saugojimui ilgą laiką.
+
+Būtina paminėti, kad vietinės atmintinės technologija turi problemų su transakcijų palaikymu – pvz. aplikacija atidaryta dvejose kortelėse ir viena kortelė įrašinėja duomenis, o kita tuo pat metu pradeda juos skaityti iš tos pačios atmintinės – šioje situacijoje neaišku ar rezultatai bus tokie kokių tikimasi.
+
+Ši technologija gali gana stipriai prisidėti prie greitesnių programų kūrimo, nes ji gali pakeisti slapukų naudojimą. Slapukai lėtina aplikacijos veikimą, nes jie turi būti perduoti serveriui kaskart kreipiantis į jį. Vienas iš būdų kaip išvengti šios problemos yra kaip galima labiau sumažinti slapukų dydį. Kitas – naudoti vietinės atmintinės galimybes. Ši technologija yra geresnė, nes jos visų duomenų nereikia kaskart perdavinėti serveriui. Dar daugiau, ši technologija turi elegantiškesnį darbo interfeisą. Vietinė atmintinė gali būti naudojama vietoj slapukų daugelyje atvejų.
+
+
+\subsection{Saityno SQL duomenų bazė (angl. web SQL database)}
+
+Visų pirma reikėtų paminėti, kad šio standarto plėtojimas yra nutrauktas 2010 metų lapkričio mėnesį. Nors ši technologija ir nėra oficiali HTML5 standarto dalis, tačiau ji yra įgyvendinta kai kurių didžiųjų naršyklių, todėl ji yra įdomi kaip dalis, kuria remiantis būtų galima kurti visokeriopo funkcionalumo taikomąsias programas. Šioje darbo dalyje apžvelgsime svarbiausias šios technologijos savybes bei galimybes sukurti OLTP aplikacijas.
+
+Lokali SQL duomenų bazė, kaip sako jau pats pavadinimas, yra kliento kompiuteryje esanti duomenų bazė, kuri suteikia pilną SQL funkcionalumą internetinėms aplikacijoms. Ši technologija pagal funkcionalumą ir sudėtingumą yra kaip ir tipinė reliacinė SQL DB. Ji veikia SQLite duomenų bazių valdymo sistemos pagrindu, kuri yra labai panaši į plačiai naudojamą MySQL duomenų bazių valdymo sistemą.
+
+OLTP sistemoms yra labai svarbus transakcijų palaikymas. Ši technologija yra kaip tik tai ko reikia, nes ji kaip ir visos kitos duomenų bazių valdymo sistemos pilnai palaiko transakcijas. 
+
+\begin{longtable}{|p{6.4cm}|p{6.4cm}|}
+\caption{Saityno SQL duomenų bazė \label{table:web_sql_db}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Privalumai}} &
+{\textbf{Trūkumai}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Privalumai}} &
+{\textbf{Trūkumai}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+\begin{itemize}
+  \item Galima kurti labai funkcionalias programas;
+  \item Galima saugoti labai sudėtingos struktūros duomenis;
+  \item Galima kurti labai funkcionalius naršyklių įskiepius;
+  \item Puikus įrankis duomenų saugojimui tokių aplikacijų kaip elektroninis paštas programoms, kai jos yra neprisijungusios prie interneto;
+  \item Nelieka problemų, kai su ta pačia programa dirbama atskirose kortelėse ar languose, nes tas problemas sutvarko duomenų bazių valdymo sistema.
+  \item Duomenų vientisumas užtikrinamas, nes pilnai palaikomos transakcijos.
+\end{itemize}
+&
+\begin{itemize}
+  \item Internetinės aplikacijos gali tapti labai sudėtingomis, brangiomis, nestabiliomis ir t.t.
+  \item Palaikymo problema: naršyklės arba palaiko, arba palaiko dalinai, arba visai nepalaiko šio standarto.
+  \item Gana ribotas pritaikomumas, nes dalis naršyklių nepalaiko šios technologijos, todėl gali tekti kurti keletą tos pačios programos versijų, kad visa tai veikti pas daugelį klientų. Labiausiai tinka naršyklių įskiepių kūrimui.
+  \item Kadangi yra panašias galimybes siūlančių technologijų (pvz. Lokali saugykla), lokalios SQL duombazės turėtų būti skirtos stambiems duomenis saugoti kliento kompiuteryje, kas vargu ar yra pagirtina.
+\end{itemize}
+\end{longtable}
+
+Vienas iš gražesnių lokalios SQL duomenų bazės naudojimo pavyzdžių būtų žinučių programa. Jei žinutės būtų saugomos kliento kompiuteryje, tai būtų galima sutaupyti kiekvieną kartą nesikreipiant į serverį, kai norima atlikto tokias operacijas kaip: paieška, filtravimas, rykiavimas. Dar daugiau, būtų galima atlikinėti paieškas ar kitas darbo su žinutėmis oepracijas ties kiekvienu mygtuko paspaudimu, taip programas padarant labiau interaktyviomis.
+
+\subsection{Indeksuota duomenų bazė (anlg. indexed DB)}
+
+[TODO]
+Indeksuotos duomenų bazės technologija skirta duomenų saugojimui kliento kompiuteryje. Ji suteikia galimybę saugoti sąlyginai didelius duomenų kiekius – [TODO] ir greitai paieškai tuose duomenyse, nes yra naudojami indeksai. Vienas pagrindinių tikslų yra saugoti didelius duomenų kiekius darbui neprisijungus prie tinklo. Kad kompiuteris nebūtų užterštas nepageidaujamais duomenimis, naršyklė paklaus naudotojo ar jis sutinka sukurti dar vieną DB. Ir svarbu paminėti, kad naujos duomenų bazės kūrimas yra užblokuotas kai naršymas vyksta privačiu režimu.Indeksuota duomenų bazė yra kaip mišrūnas dviejų aukščiau išvardytų duomenų saugojimo būdų: raktas-reikšmė poros, bet jas dar galima indeksuoti, todėl paieška tampa žymiai greitesnė.
+
+\subsection{Failų API}
+[TODO]
+
+\subsection{Duomenų kiekiai}
+
+Visomis aukščiau minėtomis technologijomis kliento kompiuteryje esantys duomenys yra susiejami su vienu domenu ir tie duomenys nėra pasiekiami iš kitų domenų – tai lyg ir „smėlio dėžės“ (angl. Sandbox) principas.
+
+Vienas domenas kliento kompiuteryje pavyzdžiui gali turėti:
+\begin{itemize}
+  \item 5MB Web Storage
+  \item 25MB Web SQL Database
+  \item Negali turėti Indexed Database
+\end{itemize}
+Viso 30 MB, kas yra gana nemažai, tačiau šis dydis lengvai gali būti padidintas iki tiek kiek reikia.
+
+Bendru atveju duomenų kiekiui pasiekus maksimalią ribą, naršyklė gali paklausti kliento, ar galima padidinti normas. Dabar standartinis maksimalų duomenų kiekį nusakantis skaičius yra 5MB - iki tokio duomenų kiekio naršyklė kliento gali ir neprašyti leidimo duomenų saugojimui.
+
+\subsection{Naujųjų technologijų palaikymas naršyklėse}
+
+Situacija naršyklių rinkoje dabar yra tokia, kad ne visos naršyklės viską palaiko ir net ir tos, kurios palaiko, palaiko ne viską vienodai. Bet visų šių technologijų tikslai yra du (įgalinti WEB aplikacijas veikti offline režimu, ir padidinti darbo spartą) ir jie niekaip nesako, kad šių technologijų nepalaikymas reikš, kad jų pagalba pagamintos programos neveiks su visomis naršyklėmis – blogiausiu atveju viskas veiks tik online režimu.
+
+\begin{longtable}{|p{6.4cm}|p{6.4cm}|}
+\caption{Naujųjų technologijų palaikomumas \label{table:palaikomumas}}\\
+%This is the header for the first page of the table...
+
+\hline \hline
+{\textbf{Technologija}} &
+{\textbf{Palaikomumas}}\\
+\hline
+\endfirsthead
+
+%This is the header for the remaining page(s) of the table...
+
+\multicolumn{2}{c}{{\tablename} \thetable{} -- Tęsinys} \\[0.5ex]
+\hline \hline
+{\textbf{Technologija}} &
+{\textbf{Palaikomumas}}\\
+\hline
+\endhead
+
+%This is the footer for all pages except the last page of the table...
+
+\multicolumn{2}{l}{{Lentelės tęsinys kitame puslapyje\ldots}} \\
+\endfoot
+
+%This is the footer for the last page of the table...
+
+\hline \hline
+\endlastfoot
+\hline 
+Aplikacijų talpykla
+&
+Palaikoma visų naujausių ir populiariausių naršyklių.
+\\
+\hline
+Vietinė atmintinė
+&
+Palaikoma visų naujausių ir populiariausių naršyklių.
+\\
+\hline
+Saityno SQL duomenų bazė
+&
+Palaikoma „Google Chrome“, „Safari“ ir „Opera“ naršyklių. Oficialiai standarto plėtojimas yra nutrauktas. „Firefox“ ir „Microsoft“ naršyklių gamintojai pasisako prieš šį standartą ir neplanuoja įgyvendinti šios technologijos.
+\\
+\hline
+Indeksuota duomenų bazė
+&
+Palaikoma tik „Google Chrome“ ir „Firefox“ naršyklių. Kadangi šis standartas yra plėtojamas, tai laikui bėgant turėtų atsirasti ir kitų naršyklių palaikymas šiai technologijai.
+\end{longtable}
+Labiausiai palaikoma naujoji technologija, galinti rimtai prisidėti kuriant internetines OLTP sistemas, kurios galės veikti ir be interneto ryšio, yra vietinė atmintinė, nes ji turi puikų paprastumo ir funkcionalumo santykį. Ateityje svariausiai prie naujo tipo OLTP sistemų kūrimo svariausiai turėtų prisidėti indeksuotos duomenų bazės technologija.
 
 \addcontentsline{toc}{section}{REZULTATAI IR IŠVADOS}
 \section*{REZULTATAI IR IŠVADOS}
-Čia bus rezultatų ir išvadų tekstas
 
-\addcontentsline{toc}{section}{ŠALTINIAI} 
-\section*{ŠALTINIAI}
+Šiame darbe buvo išnagrinėtos OLTP sistemos: apibrėžta tokių sistemų klasė bei peržvelgtos pagrindinės tokių sistemų savybės. Šios sistemos yra sudėtingos dėl griežtų joms keliamų reikalavimų.
+
+Ruošiant medžiagą darbui pastebėta, jog OLTP trūksta aiškios atskirties tarp OLTP ir OLAP sistemų. Todėl visas skyrius buvo skirtas išsiaiškinti pagrindinius tokių sistemų skirtumus.
+
+Didžiausias dėmesys šiame darbe buvo skirtas technologijoms, kuriomis galima grįsti OLTP sistemų, veikiančių tiesiog interneto naršyklėse, veikimą atsijungus nuo saityno. Buvo apžvelgtos jau keletą ar kelioliką metų egzistuojančios standartinės technologijos: slapukai bei papildiniais (,,Flash``, programėlės, ,,Google Gears`` grįsti sprendimai. Taip pat apžvelgti ir paskirų naršyklių gamintojų mėginimai sukurti sprendimus, leidžiančius internetinėms svetainėms dirbti su kliento kompiuteryje esančia atmintine.
+
+Yra svarbu apžvelgti, kokios yra internetinių technologijų vystymosi tendencijos, nes nuolat didėja interneto reikšmė. Pastaraisiais metais yra daug dirbama, ties naujų interneto standartų kūrimu. Tarp naujųjų standartų yra tokių, kurie gali kokybiškai pagerinti internetinių OLTP sistemų veikimą ta prasme, kad internetinės programos gali veikti atsijungusios ir pasiekti kliento atmintinę. Įvertinus siūlomas naujoves (programų podėlį, vidinę atmintinę, saityno SQL duomenų bazę, indeksuotą duomenų bazę, failų API), belieka sėsti prie klaviatūrų ir kurti naujo tipo programas, kurios bus greitesnės, mobilesnės ir naudingesnės
+
+\addcontentsline{toc}{section}{LITERATŪRA} 
 
 \begin{thebibliography}{99}
 % Reikia pagalbos kaip sutvarkyt literatūros išlygiavimą
 \bibitem[DGJ08]{DGJ08} 
-V. Dagienė, G. Grigas, T. Jevsikova. Enciklopedinis kompiuterijos žodynas. 2-as papildytas leidimas. Vilnius: TEV, 2008, 654 p. Žiūrėta[2011-05-29] Prieiga per internetą:\url{http://www.likit.lt/term/enc.html}
+V. Dagienė, G. Grigas, T. Jevsikova. Enciklopedinis kompiuterijos žodynas. 2-as papildytas leidimas. Vilnius: TEV, 2008, 654 p. Žiūrėta[2011-05-29].  Prieiga per internetą: \url{http://www.likit.lt/term/enc.html}
 
-\bibitem[UPI07]{UPI07} % Keista klaida: nerodo pirmos raidės!!!
- UUsing Partitioning in an Online Transaction Processing Environment. 2007. [Žiūrėta: 2011-06-01]. Prieiga per internetą: \url{http://download.oracle.com/docs/cd/B28359_01/server.111/b32024/part_oltp.htm}
+\bibitem[UPI07]{UPI07}
+Using Partitioning in an Online Transaction Processing Environment. 2007. [Žiūrėta: 2011-06-01]. Prieiga per internetą:   \url{http://download.oracle.com/docs/cd/B28359_01/server.111/b32024/part_oltp.htm}
  
 \bibitem[EDW06]{EDW06} 
-Enterprise Data Warehouse (EDW). 2006. [Žiūrėta: 2011-06-01]. Prieiga per internetą: \url{http://edw.berkeley.edu/documents/Enterprise%20Data%20Warehouse%20brown%20bag%20-%2010-5-06.pdf}
+Enterprise Data Warehouse (EDW). 2006. [Žiūrėta: 2011-06-01]. Prieiga per internetą:  \url{http://edw.berkeley.edu/documents/Enterprise%20Data%20Warehouse%20brown%20bag%20-%2010-5-06.pdf}
 
 \end{thebibliography}
 
@@ -523,6 +700,12 @@ Enterprise Data Warehouse (EDW). 2006. [Žiūrėta: 2011-06-01]. Prieiga per int
 \textbf{Programėlės (angl. applet)} - Nedidelė programa, kuri yra serveryje ir gali būti iškviesta iš tinklalapio. Vykdoma kliento naršyklėje.
 Programėlės dažniausiai rašomos Javos kalba. Tam, kad jos galėtų būti vykdomos, naršyklė turi būti suderinama su Java ir parinkta atitinkama programėlių vykdymo nuostata. Javos programėlės pasižymi tuo, kad gali pagyvinti tinklalapį, suteikti jam dinamiškumo ir gali būti vykdomos įvairiose operacinėse sistemose.[DGJ08]
 
+\textbf{Podėlis (angl. cache)} - atmintis, skiriama laikinai padėti programos duomenims, kurių gali vėliau prireikti. Prisipilžius podėliui programa, prieš įrašydama naujus duomenis, pašalina dalį anksčiau įrašytų. Paprastai šalinami tie duomenys, kurių, kaip tikimasi, mažiausiai prireiks, pavyzdžiui, seniausiai įrašyti arba rečiausiai naudoti.[DGJ08]
+
+\textbf{Slapukas (angl. cookie)} - duomenų rinkinys, kurį sukuria svetainė ir įrašo į lankytojo kompiuterį. Tai informacija, kuri paspartina arba supaprastina darbą vėl kreipiantis į tą pačią svetainę, pavyzdžiui, įsimenama anksčiau užpildyta anketa ir nebereikia jos pildyti iš naujo.[DGJ08]
+
+\textbf{Saitynas (angl. web)} - žiniatinklio sinonimas - hipertekstinės informacijos visuotinis tinklas, svarbiausias interneto komponentas.
+
 \textbf{Foninė programa (angl. background application, background program)} - Programa, nesanti veikiamajame lange.
 Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.[DGJ08]
 
@@ -532,8 +715,10 @@ Gali atlikti veiksmus, signalizuoti apie jų eigą, bet negali priimti komandų.
 
 \addcontentsline{toc}{section}{SANTRUMPOS}
 \section*{SANTRUMPOS}
-DB - duomenų bazė.
+% Gal tas kelias santrumpas tiesiog į išnašas sudėt ir nebus vargo?
+
 OLAP (angl. Online Analytical Processing) – tai technologija, leidžianti greitai, realiame laike ir įvairiais įmanomais pjūviais peržiūrėti informaciją, naudojant duomenų modelį, kuris atspindi realų organizacijos veiklos vaizdą, kaip jį supranta vartotojas, t. y. organizacijos duomenų atvaizdas yra daugiamatis.
+
 OLTP - nuo angliško termino ,,Online Transactional Processing`` - tiesioginis transakcijų apdorojimas.
 \end{document}
 
